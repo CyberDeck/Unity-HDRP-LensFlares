@@ -1,0 +1,16 @@
+{
+  "name": "de.secretlab.hdrplensflares",
+  "version": "0.1.0",
+  "displayName": "HDRP Lens Flares",
+  "description": "Collection of post-processing HDRP lens flare effects.",
+  "unity": "2019.3",
+  "unityRelease": "11f1",
+  "keywords": [
+    "HDRP",
+    "Lens Flare"
+  ],
+  "author": {
+    "name": "H. Gregor Molter",
+    "email": "gregor.molter@secretlab.de"
+  }
+}

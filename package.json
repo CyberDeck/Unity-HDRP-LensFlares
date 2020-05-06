@@ -1,6 +1,6 @@
 {
   "name": "de.secretlab.hdrplensflares",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "HDRP Lens Flares",
   "description": "Collection of post-processing HDRP lens flare effects.",
   "unity": "2019.3",

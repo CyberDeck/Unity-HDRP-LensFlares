@@ -67,6 +67,7 @@ Shader "Hidden/Shader/LensFlares/RadialWarpAndGhosts"
     // Horizontal Blur 
     float4 FragHBlur(Varyings input) : SV_Target
     {
+        UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
         float2 uv = input.texcoord;
         float2 step = float2(_InputTexture_TexelSize.x, 0);
         float3 color;
@@ -80,6 +81,7 @@ Shader "Hidden/Shader/LensFlares/RadialWarpAndGhosts"
     // Vertical Blur 
     float4 FragVBlur(Varyings input) : SV_Target
     {
+        UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
         float2 uv = input.texcoord;
         float2 step = float2(0, _InputTexture_TexelSize.y);
         float3 color;
@@ -93,6 +95,7 @@ Shader "Hidden/Shader/LensFlares/RadialWarpAndGhosts"
     // Radial warp
     float4 FragRadialWarp(Varyings input) : SV_Target
     {
+        UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
         float2 uv = input.texcoord;
         float2 ghostVec = uv - 0.5;
         float2 haloVec = normalize(ghostVec) * -_RadialWarpLength;
@@ -108,6 +111,7 @@ Shader "Hidden/Shader/LensFlares/RadialWarpAndGhosts"
     // Ghosts
     float4 FragGhost(Varyings input) : SV_Target
     {
+        UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
         float2 uv = input.texcoord;
         float2 ghost_uv = uv - 0.5;
         float3 color;
@@ -123,6 +127,7 @@ Shader "Hidden/Shader/LensFlares/RadialWarpAndGhosts"
     // Chromatic Aberration from two combined textures 
     float4 FragChromaticAberration(Varyings input) : SV_Target
     {
+        UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
         float2 texcoord = input.texcoord.xy * 2 - 1;
         float2 diff_texels = normalize(-texcoord) * pow(dot(texcoord, texcoord), 0.25) * 36;
         float2 diff_sampler = diff_texels * _InputTexture_TexelSize.xy;
@@ -150,6 +155,7 @@ Shader "Hidden/Shader/LensFlares/RadialWarpAndGhosts"
     // Box Up Sampling 
     float4 FragBox(Varyings input) : SV_Target
     {
+        UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
         float2 uv = input.texcoord;
         float4 offset = _InputTexture_TexelSize.xyxy * float4(-_Delta, -_Delta, _Delta, _Delta);
         float3 color = (SAMPLE_TEXTURE2D(_InputTexture, s_linear_clamp_sampler, uv + offset.xy).rgb
@@ -163,7 +169,6 @@ Shader "Hidden/Shader/LensFlares/RadialWarpAndGhosts"
     float4 FragComposition(Varyings input) : SV_Target
     {
         UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
-
         float2 uv = input.texcoord;
         uint2 ss = uv * _ScreenSize.xy;
         
